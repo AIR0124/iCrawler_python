@@ -5,12 +5,13 @@ from datetime import datetime
 import scrapy
 from bs4 import BeautifulSoup
 
-from iCrawler_python.items import WZItem
+from iCrawler_python.items import NewsItem
+from iCrawler_python.settings import logger
 
 
 class ZhihuhaoSpider(scrapy.Spider):
     """
-    知乎号专栏文章爬虫
+    知乎号文章爬虫
     """
     name = 'zhihuhao'
     allowed_domains = ['zhihu.com']
@@ -22,7 +23,7 @@ class ZhihuhaoSpider(scrapy.Spider):
         self.headers_zhuanlan = {
             'Host': 'zhuanlan.zhihu.com',
         }
-        kwargs['message'] = '{"keyword": "qiong-you-jin-nang"}'    # test
+        kwargs['message'] = '{"keyword": "qiong-you-jin-nang","keyword": "ravenblockchain","keyword": "zhu-yin-lun"}'   # test
         self.message = json.loads(kwargs.get('message'))
         self.keyword = self.message.get('keyword', '')
         self.i = 0
@@ -51,7 +52,7 @@ class ZhihuhaoSpider(scrapy.Spider):
             item = {
                 'url': detail_url,
                 'name': name,
-                'module_name': self.keyword,
+                'zhihuhao': self.keyword,
             }
 
             yield scrapy.Request(
@@ -114,6 +115,7 @@ class ZhihuhaoSpider(scrapy.Spider):
                     elif not src and data_actualsrc:
                         img['src'] = data_actualsrc
                 except Exception as e:
+                    logger.exception(str(e))
                     continue
 
         pure_text = document.text.strip()
@@ -129,9 +131,5 @@ class ZhihuhaoSpider(scrapy.Spider):
         item['html'] = str(document)
         item['pure_text'] = pure_text
 
-        fp = open('D:\source_code\GitHub\iCrawler_python\iCrawler_python\spider_html\\' + str(item['title']) + '.html', 'wb')
-        fp.write(bytes(item['html'], encoding='utf8'))
-        fp.close()
-
-        zhihuhao_item = WZItem(item)
+        zhihuhao_item = NewsItem(item)
         yield zhihuhao_item

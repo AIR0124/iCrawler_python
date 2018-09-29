@@ -43,14 +43,14 @@ class LagouwangItem(scrapy.Item):
     publishDate = scrapy.Field()        # 发布时间
     jobDescription = scrapy.Field()     # 职位描述
 
-class WZItem(scrapy.Item):
+class NewsItem(scrapy.Item):
     """
     文章类
     """
-    module_name = scrapy.Field()
-    title = scrapy.Field()
-    url = scrapy.Field()
-    pub_date = scrapy.Field()
-    html = scrapy.Field()
-    pure_text = scrapy.Field()
-    name = scrapy.Field()
+    zhihuhao = scrapy.Field()           # 知乎号
+    title = scrapy.Field()              # 标题
+    url = scrapy.Field()                # 正文URL
+    pub_date = scrapy.Field()           # 发布时间
+    html = scrapy.Field()               # 正文html
+    pure_text = scrapy.Field()          # 正文文本
+    name = scrapy.Field()               # 知乎号名称
