@@ -2,7 +2,7 @@
 
 
 class commonFormat():
-    """通用html格式化类"""
+
 
     def remove_empty_P(self, document):
         """
@@ -21,14 +21,3 @@ class commonFormat():
             if len(div.text.strip()) > 0 or '<img' in str(div):
                 continue
             div.extract()
-
-    def beautifulHtml(self, html):
-        """
-        格式化html
-        :param html: 需格式化的html
-        :return: 转化后的html
-        """
-        html = html.strip()
-        if not '<html>' in html and not '<body>' in html:
-            html = '<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head><body>{0}</body></html>'.format(html)
-        return html

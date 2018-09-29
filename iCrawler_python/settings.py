@@ -49,16 +49,12 @@ MONGODB_PASSWORD = ""
 # mongo collection
 DOUBANGAOFEN_MOVIE_COLLECTION = 'doubangaofen_movie'
 LAGOUWANG_GANGWEIXINXI_COLLECTION = 'lagouwang_gangweixinxi'
+NEWS_COLLECTION = 'news'
 
 # redis config
 DUPEFILTER_CLASS = 'iCrawler_python.url_filter.UrlRedisFilter'
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-
-# proxy config
-PROXY_SERVER = 'http://http-dyn.abuyun.com:9020'
-PROXY_SIZE = 10
-PROXY_MAX_USED_TIME = 50
 
 RETRY_ENABLED = True
 RETRY_HTTP_CODES = [500, 503, 504, 400, 429, 403]
