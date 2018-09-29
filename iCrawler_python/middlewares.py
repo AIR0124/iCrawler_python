@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 import base64
-import logging
 import random
-import uuid
 
-from scrapy.conf import settings
-from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
 from scrapy.downloadermiddlewares.retry import RetryMiddleware
-from scrapy.http import HtmlResponse
 from scrapy.utils.response import response_status_message
 
-from iCrawler_python.settings import RETRY_HTTP_CODES, PROXY_SIZE, PROXY_MAX_USED_TIME
+from iCrawler_python.settings import RETRY_HTTP_CODES
 from iCrawler_python.settings import logger
 from iCrawler_python.user_agent import agents
 
@@ -24,7 +19,6 @@ class UserAgentMiddleware(object):
         exists_UA = request.headers.get('User-Agent')
         if not exists_UA:
             agent = random.choice(agents)
-            # print("当前使用User-Agent是：" + agent)
             request.headers['User-Agent'] = agent
 
 
@@ -62,8 +56,9 @@ class ProxyMiddleware(object):
     代理机制
     """
     def process_request(self, request, spider):
+        proxyServer = 'http://http-dyn.abuyun.com:9020'
         userPass = 'H566QY611P76191D:8308510CA0847A5D'
         proxyAuth = 'Basic ' + base64.urlsafe_b64encode(bytes(userPass, 'ascii')).decode('utf8')
-        request.meta['proxy'] = settings.get('proxyServer')
+        request.meta['proxy'] = proxyServer
         request.headers['Proxy-Authorization'] = proxyAuth
         spider.logger.debug('The {0} Use AbuProxy'.format(request.url))
