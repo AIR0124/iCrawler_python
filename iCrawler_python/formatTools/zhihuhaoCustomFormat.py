@@ -35,7 +35,7 @@ def extract_zhu_yin_lun(document):
 
 def extract_ravenblockchain(document):
     """
-    ravenblockchain
+    ravenblockchain广告提取
     :param document:
     :return:
     """
