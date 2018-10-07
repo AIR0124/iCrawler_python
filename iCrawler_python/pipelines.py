@@ -57,7 +57,7 @@ class IcrawlerPipeline(object):
         elif isinstance(item, NewsItem):
             try:
                 process_news_item(item)
-                self.lagouwang_collection.insert(dict(item))
+                self.news_collection.insert(dict(item))
             except Exception as e:
                 logger.exception(str(e))
         return item

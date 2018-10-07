@@ -11,6 +11,8 @@ def extract_advertising(keyword, document):
     """
     if keyword == 'zhu-yin-lun':
         extract_zhu_yin_lun(document)
+    if keyword == 'ravenblockchain':
+        extract_ravenblockchain(document)
 
 def extract_zhu_yin_lun(document):
     """
@@ -18,7 +20,7 @@ def extract_zhu_yin_lun(document):
     :param document:
     :return:
     """
-    if '关联阅读' or 'Good things | 往期旅行好物推荐' in document.text:
+    if '关联阅读' in document.text:
         glyds = document.find_all(name='a', attrs={'class': ' wrap external'})
         if glyds:
             for glyd in glyds:
@@ -26,10 +28,18 @@ def extract_zhu_yin_lun(document):
                 if 'https://link.zhihu.com/?target=' in href:
                     glyd.extract()
         if '关联阅读' in document.text:
-            glydTs = document.find_all(name="p", text=re.compile(r'^\s*关联阅读:\s*$'))
+            glydTs = document.find_all('p')
             for glydT in glydTs:
-                glydT.extract()
-        if 'Good things | 往期旅行好物推荐' in document.text:
-            gts = document.find_all(name="p", text=re.compile(r'^\s*Good things | 往期旅行好物推荐\s*$'))
-            for gt in gts:
-                gt.extract()
+                if '关联阅读' in glydT.text:
+                    glydT.extract()
+
+
+def extract_ravenblockchain(document):
+    """
+    ravenblockchain
+    :param document:
+    :return:
+    """
+    ps = document.find_all(name='p', text=re.compile(r'^\s*零识仅为翻译中文供大家学习使用，本文版权归英文原作者所有。\s*$'))
+    for p in ps:
+        p.extract()

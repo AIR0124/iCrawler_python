@@ -47,10 +47,11 @@ class NewsItem(scrapy.Item):
     """
     文章类
     """
-    zhihuhao = scrapy.Field()           # 知乎号
+    website_name = scrapy.Field()       # 来源
+    message = scrapy.Field()            # 消息体
     title = scrapy.Field()              # 标题
     url = scrapy.Field()                # 正文URL
     pub_date = scrapy.Field()           # 发布时间
     html = scrapy.Field()               # 正文html
     pure_text = scrapy.Field()          # 正文文本
-    name = scrapy.Field()               # 知乎号名称
+    name = scrapy.Field()               # 作者

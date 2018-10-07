@@ -23,7 +23,7 @@ class ZhihuhaoSpider(scrapy.Spider):
         self.headers_zhuanlan = {
             'Host': 'zhuanlan.zhihu.com',
         }
-        kwargs['message'] = '{"keyword": "qiong-you-jin-nang","keyword": "ravenblockchain","keyword": "zhu-yin-lun"}'   # test
+        kwargs['message'] = '{"keyword": "qiong-you-jin-nang","keyword": "zhu-yin-lun","keyword": "ravenblockchain"}'   # test
         self.message = json.loads(kwargs.get('message'))
         self.keyword = self.message.get('keyword', '')
         self.i = 0
@@ -52,7 +52,8 @@ class ZhihuhaoSpider(scrapy.Spider):
             item = {
                 'url': detail_url,
                 'name': name,
-                'zhihuhao': self.keyword,
+                'message': self.keyword,
+                'website_name': '知乎',
             }
 
             yield scrapy.Request(
