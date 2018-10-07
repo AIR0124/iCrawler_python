@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup
 
-from iCrawler_python.formatTools import zhihuhaoCustomFormat
+from iCrawler_python.formatTools import zhihuhaoCustomFormat, the36krCustomFormat
 from iCrawler_python.formatTools.commonFormat import commonFormat
 from iCrawler_python.settings import logger
 
@@ -14,16 +14,17 @@ def process_news_item(item):
     :return: 
     """
     try:
-        keyword = item.get('zhihuhao')
+        keyword = item.get('message')
         html_text = item.get('html')
-        pure_text = item.get('pure_text')
 
-        document = BeautifulSoup(html_text, u'lxml')
+        document = BeautifulSoup(html_text, 'lxml')
         if keyword in ['zhu-yin-lun', 'ravenblockchain', 'qiong-you-jin-nang']:
             zhihuhaoCustomFormat.extract_advertising(keyword, document)
-            commonFormat.remove_empty_P(keyword, document)
-            html_text = str(document)
-            pure_text = document.text.strip()
+        if keyword in ['python']:
+            the36krCustomFormat.extract_advertising(document)
+        commonFormat.remove_empty_P(keyword, document)
+        html_text = str(document)
+        pure_text = document.text.strip()
 
         if not pure_text:
             pure_text = item.get('title')
