@@ -28,10 +28,9 @@ def extract_zhu_yin_lun(document):
                 if 'https://link.zhihu.com/?target=' in href:
                     glyd.extract()
         if '关联阅读' in document.text:
-            glydTs = document.find_all('p')
+            glydTs = document.find_all(name='p', text=re.compile(r'^关联阅读[:]*.*$'))
             for glydT in glydTs:
-                if '关联阅读' in glydT.text:
-                    glydT.extract()
+                glydT.extract()
 
 
 def extract_ravenblockchain(document):
