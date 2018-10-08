@@ -55,3 +55,43 @@ class NewsItem(scrapy.Item):
     html = scrapy.Field()               # 正文html
     pure_text = scrapy.Field()          # 正文文本
     name = scrapy.Field()               # 作者
+
+class ZhihuUserItem(scrapy.Item):
+    """
+    知乎用户
+    """
+    answer_count = scrapy.Field()               # 回答数
+    articles_count = scrapy.Field()             # 文章数
+    badge = scrapy.Field()                      # 成就
+    columns_count = scrapy.Field()              # 专栏数
+    commercial_question_count = scrapy.Field()  # 提问数
+    description = scrapy.Field()                # 描述
+    educations = scrapy.Field()                 # 教育
+    employments = scrapy.Field()                # 职业
+    favorite_count = scrapy.Field()             # 收藏数
+    favorited_count = scrapy.Field()            # 被收藏数
+    follower_count = scrapy.Field()             # 粉丝数
+    following_columns_count = scrapy.Field()    # 关注专栏的数量
+    following_count = scrapy.Field()            # 他关注用户数量
+    following_favlists_count = scrapy.Field()   # 他关注的收藏夹数量
+    following_question_count = scrapy.Field()   # 他关注的问题数量
+    following_topic_count = scrapy.Field()      # 他关注的话题数量
+    gender = scrapy.Field()                     # 性别
+    headline = scrapy.Field()
+    hosted_live_count = scrapy.Field()          # 举办的live数量
+    id = scrapy.Field()
+    locations = scrapy.Field()                  # 地址
+    logs_count = scrapy.Field()                 # 参与公共编辑次数
+    marked_answers_count = scrapy.Field()       # 知乎收录的回答数量
+    marked_answers_text = scrapy.Field()        # 知乎收录在的地址
+    name = scrapy.Field()                       # 用户名
+    participated_live_count = scrapy.Field()    # 参与live的数量
+    pins_count = scrapy.Field()                 # 用户想法次数
+    question_count = scrapy.Field()             # 提问次数
+    thank_from_count = scrapy.Field()
+    thank_to_count = scrapy.Field()
+    thanked_count = scrapy.Field()              # 获得感谢次数
+    type = scrapy.Field()
+    url = scrapy.Field()
+    url_token = scrapy.Field()
+    user_type = scrapy.Field()

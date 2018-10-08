@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'iCrawler_python.spiders'
 logger = logging.getLogger(__name__)
 
 ROBOTSTXT_OBEY = False
-DOWNLOAD_DELAY = 0.5
+DOWNLOAD_DELAY = 0.3
 AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_START_DELAY = 0.3
 COOKIES_ENABLED = False
@@ -50,6 +50,7 @@ MONGODB_PASSWORD = ""
 DOUBANGAOFEN_MOVIE_COLLECTION = 'doubangaofen_movie'
 LAGOUWANG_GANGWEIXINXI_COLLECTION = 'lagouwang_gangweixinxi'
 NEWS_COLLECTION = 'news'
+ZHIHUUSER_COLLECTION = 'zhihu_user'
 
 # redis config
 DUPEFILTER_CLASS = 'iCrawler_python.url_filter.UrlRedisFilter'
