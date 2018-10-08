@@ -10,7 +10,7 @@ from scrapy.conf import settings
 from scrapy.crawler import logger
 
 from iCrawler_python.item_processors.news_item_processor import process_news_item
-from iCrawler_python.items import DoubangaofenItem, NewsItem, LagouwangItem
+from iCrawler_python.items import DoubangaofenItem, NewsItem, LagouwangItem, ZhihuUserItem
 from iCrawler_python.url_filter import UrlFiltration
 
 
@@ -18,6 +18,7 @@ class IcrawlerPipeline(object):
     doubangaofen_movie = settings.get('DOUBANGAOFEN_MOVIE_COLLECTION')
     lagouwang_gangweixinxi = settings.get('LAGOUWANG_GANGWEIXINXI_COLLECTION')
     news = settings.get('NEWS_COLLECTION')
+    zhihu_user = settings.get('ZHIHUUSER_COLLECTION')
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -36,6 +37,7 @@ class IcrawlerPipeline(object):
         self.doubangaofen_movie_collection = db[self.doubangaofen_movie]
         self.lagouwang_collection = db[self.lagouwang_gangweixinxi]
         self.news_collection = db[self.news]
+        self.zhihu_user_collection = db[self.zhihu_user]
 
     def close_spider(self, spider):
         self.client.close()
@@ -58,6 +60,11 @@ class IcrawlerPipeline(object):
             try:
                 process_news_item(item)
                 self.news_collection.insert(dict(item))
+            except Exception as e:
+                logger.exception(str(e))
+        elif isinstance(item, ZhihuUserItem):
+            try:
+                self.zhihu_user_collection.insert(dict(item))
             except Exception as e:
                 logger.exception(str(e))
         return item
