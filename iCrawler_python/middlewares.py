@@ -53,7 +53,7 @@ class SpiderRetryMiddleware(RetryMiddleware):
 
 class ProxyMiddleware(object):
     """
-    代理机制
+    动态代理切换
     """
     def process_request(self, request, spider):
         proxyServer = 'http://http-dyn.abuyun.com:9020'

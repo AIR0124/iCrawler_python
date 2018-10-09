@@ -19,14 +19,6 @@ class UrlRedisFilter(RFPDupeFilter):
             print(request.url + '已抓')
             return True
 
-        # 根据Request对象, 生成一个请求的指纹字符串
-        # fp = self.request_fingerprint(request)
-        # if fp in self.fingerprints:
-        #     return True
-        # self.fingerprints.add(fp)
-        # if self.file:
-        #     self.file.writer(fp + os.linesep)
-
 class UrlFiltration(object):
     def __init__(self):
         redis_config = {'host': settings.get('REDIS_HOST'), 'port': settings.get('REDIS_PORT'), 'db': 15}
@@ -34,20 +26,20 @@ class UrlFiltration(object):
         self.redis = StrictRedis(connection_pool=self.pool)
         self.key = 'spider_redis_key'
 
-    def url_sha1(self, url):
-        fp = hashlib.sha1()
+    def url_md5(self, url):
+        fp = hashlib.md5()
         fp.update(canonicalize_url(url).encode('utf-8'))    # 将URL规范化为标准形式以避免重复
-        url_sha1 = fp.hexdigest()
-        return url_sha1
+        url_md5 = fp.hexdigest()
+        return url_md5
 
     def check_url(self, url):
-        sha1 = self.url_sha1(url)
-        isExist = self.redis.sismember(self.key, sha1)  # 判断URL是否在set中，不缓存URL信息
+        md5 = self.url_md5(url)
+        isExist = self.redis.sismember(self.key, md5)  # 判断URL是否在set中，不缓存URL信息，true已抓
         return isExist
 
     def add_url(self, url):
-        sha1 = self.url_sha1(url)
-        added = self.redis.sadd(self.key, sha1)
+        md5 = self.url_md5(url)
+        added = self.redis.sadd(self.key, md5)
         return added
 
 
