@@ -37,7 +37,7 @@ DOWNLOADER_MIDDLEWARES = {
 
 ITEM_PIPELINES = {
     'iCrawler_python.pipelines.IcrawlerPipeline': 125,
-    'iCrawler_python.pipelines.UrlFilterPipeline': 300
+    'iCrawler_python.pipelines.UrlFilterPipeline': 129
 }
 
 # mongo config
