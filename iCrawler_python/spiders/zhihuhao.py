@@ -54,6 +54,7 @@ class ZhihuhaoSpider(scrapy.Spider):
                 'name': name,
                 'message': self.keyword,
                 'website_name': '知乎',
+                'module_name': '知乎号'
             }
 
             yield scrapy.Request(
