@@ -48,7 +48,8 @@ class The36ke(scrapy.Spider):
                 'title': title,
                 'url': url,
                 'message': self.keyword,
-                'website_name': '36氪'
+                'website_name': '36氪',
+                'module_name': '36氪搜索'
             }
 
             yield scrapy.Request(

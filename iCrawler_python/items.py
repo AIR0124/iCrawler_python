@@ -55,6 +55,7 @@ class NewsItem(scrapy.Item):
     html = scrapy.Field()               # 正文html
     pure_text = scrapy.Field()          # 正文文本
     name = scrapy.Field()               # 作者
+    module_name = scrapy.Field()
 
 class ZhihuUserItem(scrapy.Item):
     """
